@@ -2,7 +2,12 @@ import Vapor
 
 extension Droplet {
     func setupRoutes() throws {
-        get("hello") { req in
+		
+		get() { req in
+			return "Welcome to my home page!"
+		}
+		
+		get("hello") { req in
             var json = JSON()
             try json.set("hello", "world")
             return json
@@ -17,9 +22,10 @@ extension Droplet {
         get("info") { req in
             return req.description
         }
-
+		// /description
         get("description") { req in return req.description }
-        
+		
+		// /posts
         try resource("posts", PostController.self)
     }
 }
